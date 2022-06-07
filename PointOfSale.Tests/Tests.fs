@@ -2,10 +2,9 @@ module Tests
 
 open Xunit
 open Grocery.PointOfSale
-open Grocery.PointOfSale.Implementations
 
-let context = Context.createContext()
-let calulator : CartCalculator = CartItemDiscountCalculator(context) 
+let context = Context()
+let calulator = CartItemDiscountCalculator(context) 
 let terminal = PointOfSaleTerminal(context, calulator)
 
 context.Products.Create("A", 1.25M, discountAmount = 3, discountPrice = 3.00M)

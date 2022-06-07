@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PointOfSale.Implementations\PointOfSale.Implementations.fsproj" />
     <ProjectReference Include="..\PointOfSale\PointOfSale.csproj" />
   </ItemGroup>
 

@@ -2,24 +2,24 @@
 
 public class PointOfSaleTerminal
 {
-    private readonly IUnitOfWork ctx;
+    private readonly IUnitOfWork context;
     private readonly CartCalculator cartCalculator;
 
-    public PointOfSaleTerminal(IUnitOfWork ctx, CartCalculator cartCalculator)
+    public PointOfSaleTerminal(IUnitOfWork context, CartCalculator cartCalculator)
     {
-        this.ctx = ctx;
+        this.context = context;
         this.cartCalculator = cartCalculator;
     }
 
     public Cart CreateCart()
     {
-        return ctx.Carts.Create();
+        return context.Carts.Create();
     }
 
     public void Scan(Cart cart, string productCode)
     {
-        var product = ctx.Products.Get(productCode);
-        ctx.CartItems.AddCartItems(cart, product);
+        var product = context.Products.Get(productCode);
+        context.CartItems.AddCartItems(cart, product);
     }
 
     public decimal CalculateTotal(Cart cart)

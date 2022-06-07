@@ -2,11 +2,11 @@
 
 public class CartItemDiscountCalculator : CartCalculator
 {
-    public CartItemDiscountCalculator(IUnitOfWork ctx) : base(ctx) { }
+    public CartItemDiscountCalculator(IUnitOfWork context) : base(context) { }
 
     public override decimal Calculate(Cart cart)
     {
-        return ctx.CartItems.GetCartItems(cart.Id).Sum(Calculate);
+        return context.CartItems.GetCartItems(cart.Id).Sum(Calculate);
     }
 
     private decimal Calculate(CartItem cartItem)

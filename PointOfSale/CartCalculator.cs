@@ -2,11 +2,11 @@
 
 public abstract class CartCalculator
 {
-    protected readonly IUnitOfWork ctx;
+    protected readonly IUnitOfWork context;
 
-    public CartCalculator(IUnitOfWork ctx)
+    public CartCalculator(IUnitOfWork context)
     {
-        this.ctx = ctx;
+        this.context = context;
     }
 
     public abstract decimal Calculate(Cart cart);

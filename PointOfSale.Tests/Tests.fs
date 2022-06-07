@@ -2,6 +2,7 @@ module Tests
 
 open Xunit
 open Grocery.PointOfSale
+open Grocery.PointOfSale.Implementations
 
 let context = Context()
 let calulator = CartItemDiscountCalculator(context) 

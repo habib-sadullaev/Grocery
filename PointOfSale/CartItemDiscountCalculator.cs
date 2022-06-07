@@ -1,5 +1,8 @@
 ﻿namespace Grocery.PointOfSale;
 
+using Grocery.PointOfSale.Interfaces;
+using Grocery.PointOfSale.Models;
+
 public class CartItemDiscountCalculator : CartCalculator
 {
     public CartItemDiscountCalculator(IUnitOfWork context) : base(context) { }

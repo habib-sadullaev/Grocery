@@ -1,4 +1,6 @@
-﻿namespace Grocery.PointOfSale;
+﻿namespace Grocery.PointOfSale.Interfaces;
+
+using Grocery.PointOfSale.Models;
 
 public interface IProductRepository
 {

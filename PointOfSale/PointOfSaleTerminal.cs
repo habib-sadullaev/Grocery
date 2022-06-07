@@ -1,5 +1,8 @@
 ﻿namespace Grocery.PointOfSale;
 
+using Grocery.PointOfSale.Interfaces;
+using Grocery.PointOfSale.Models;
+
 public class PointOfSaleTerminal
 {
     private readonly IUnitOfWork context;

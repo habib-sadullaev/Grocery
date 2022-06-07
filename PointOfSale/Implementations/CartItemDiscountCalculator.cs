@@ -1,4 +1,4 @@
-﻿namespace Grocery.PointOfSale;
+﻿namespace Grocery.PointOfSale.Implementations;
 
 using Grocery.PointOfSale.Interfaces;
 using Grocery.PointOfSale.Models;

@@ -26,8 +26,6 @@ let createContext() =
                             | false, _ ->
                                 let cartItem = CartItem(cart, product, 1)
                                 store[cartItemkey] <- cartItem
-
-                                let cart = store[cartKey cart.Id] :?> Cart
                                 cart.Items.Add(cartItem)
                           
                             | true, _ ->
@@ -67,7 +65,7 @@ let createContext() =
                     member _.Create(productCode, productPrice, discountAmount, discountPrice) =
                         match store.TryGetValue(productKey productCode) with
                         | false, _ ->
-                            let product = Product(productCode, null, null) 
+                            let product = Product(productCode) 
                             let price = ProductPrice(product, productPrice)
                             product.Price <- price
 

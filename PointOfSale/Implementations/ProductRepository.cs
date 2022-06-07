@@ -35,8 +35,9 @@ internal class ProductRepository : IProductRepository
 
     public Product Get(string productCode)
     {
-        if (context.Store.TryGetValue(ProductKey(productCode), out var val) && val is Product product)
-            return product;
-        throw new InvalidOperationException($"a product with code '{productCode}' does not exist");
+        if (!context.Store.TryGetValue(ProductKey(productCode), out var val) || val is not Product product)
+            throw new InvalidOperationException($"a product with code '{productCode}' does not exist");
+
+        return product;
     }
 }

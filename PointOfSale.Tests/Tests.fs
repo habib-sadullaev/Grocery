@@ -3,6 +3,12 @@ module Tests
 open Xunit
 open Grocery.PointOfSale
 
+do
+    ctx.Products.Create("A", 1.25M, discountAmount = 3, discountPrice = 3.00M)
+    ctx.Products.Create("B", 4.25M)
+    ctx.Products.Create("C", 1.00M, discountAmount = 6, discountPrice = 5.00M)
+    ctx.Products.Create("D", 0.75M)
+
 let calulator : CartCalculator = CartItemDiscountCalculator(ctx) 
 let terminal = PointOfSaleTerminal(ctx, calulator)
 

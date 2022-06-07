@@ -17,7 +17,7 @@ internal class ProductRepository : IProductRepository
     {
         var key = ProductKey(productCode);
         if (context.Store.TryGetValue(key, out _))
-            new InvalidOperationException($"a product with code '{productCode} already exists'");
+            new InvalidOperationException($"Product with code '{productCode} already exists'");
 
         var product = new Product(productCode);
         var price = new ProductPrice(product, productPrice);
@@ -32,11 +32,10 @@ internal class ProductRepository : IProductRepository
         context.Store[key] = product;
     }
 
-
     public Product Get(string productCode)
     {
         if (!context.Store.TryGetValue(ProductKey(productCode), out var val) || val is not Product product)
-            throw new InvalidOperationException($"a product with code '{productCode}' does not exist");
+            throw new InvalidOperationException($"Product with code '{productCode}' does not exist");
 
         return product;
     }

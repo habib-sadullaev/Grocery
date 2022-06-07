@@ -28,9 +28,9 @@ internal class CartItemRepository : ICartItemRepository
 
     public IReadOnlyCollection<CartItem> GetCartItems(int cartId)
     {
-        if (context.Store.TryGetValue(CartKey(cartId), out var obj) && obj is Cart cart)
-            return cart.Items.ToList();
+        if (!context.Store.TryGetValue(CartKey(cartId), out var obj) || obj is not Cart cart)
+            throw new InvalidOperationException($"Cart with id = '{cartId}' does not exist");
 
-        return Array.Empty<CartItem>();
+        return cart.Items.ToList();
     }
 }

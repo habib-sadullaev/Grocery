@@ -4,7 +4,7 @@ using Grocery.PointOfSale.Interfaces;
 
 public class Context : IUnitOfWork
 {
-    internal protected Dictionary<string, object> Store { get; } = new();
+    internal Dictionary<string, object> Store { get; } = new();
     
     public Context()
     {

@@ -1,12 +1,11 @@
-﻿[<AutoOpen>]
-module FakeData
+﻿module Grocery.PointOfSale.Implementations.Context
 
 open System
 open System.Collections.Generic
 open System.Linq
 open Grocery.PointOfSale
 
-let ctx =
+let createContext() =
     let store = Dictionary<string, obj>()
     let mutable counter = 0
     let cartItemKey cartId productCode = $"cartItem_{cartId}_{productCode}"
@@ -17,34 +16,34 @@ let ctx =
         new IUnitOfWork with
             member _.CartItems = 
                 { new ICartItemRepository with
-                      member _.AddCartItems(cart, product) =
-                          let cartItemkey = cartItemKey cart.Id product.Code
+                        member _.AddCartItems(cart, product) =
+                            let cartItemkey = cartItemKey cart.Id product.Code
 
-                          match store.TryGetValue(cartItemkey) with
-                          | true, (:? CartItem as cartItem) ->
-                              cartItem.Amount <- cartItem.Amount + 1
+                            match store.TryGetValue(cartItemkey) with
+                            | true, (:? CartItem as cartItem) ->
+                                cartItem.Amount <- cartItem.Amount + 1
 
-                          | false, _ ->
-                              let cartItem = CartItem(cart, product, 1)
-                              store[cartItemkey] <- cartItem
+                            | false, _ ->
+                                let cartItem = CartItem(cart, product, 1)
+                                store[cartItemkey] <- cartItem
 
-                              let cart = store[cartKey cart.Id] :?> Cart
-                              cart.Items.Add(cartItem)
+                                let cart = store[cartKey cart.Id] :?> Cart
+                                cart.Items.Add(cartItem)
                           
-                          | true, _ ->
-                              invalidOp "no such cart item"
+                            | true, _ ->
+                                invalidOp "no such cart item"
 
-                      member _.GetCartItems(cartId) =
-                          match store.TryGetValue(cartKey cartId) with
-                          | true, (:? Cart as cart) ->
-                              upcast cart.Items.ToList()
+                        member _.GetCartItems(cartId) =
+                            match store.TryGetValue(cartKey cartId) with
+                            | true, (:? Cart as cart) ->
+                                upcast cart.Items.ToList()
                     
-                          | false, _ ->
-                              upcast Array.Empty()
+                            | false, _ ->
+                                upcast Array.Empty()
                           
-                          | true, o ->
-                              if isNull o then "unreachable" else o.GetType().Name 
-                              |> invalidOp }
+                            | true, o ->
+                                if isNull o then "unreachable" else o.GetType().Name 
+                                |> invalidOp }
 
             member _.Carts =
                 { new ICartRepository with

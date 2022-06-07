@@ -2,15 +2,16 @@ module Tests
 
 open Xunit
 open Grocery.PointOfSale
+open Grocery.PointOfSale.Implementations
 
-do
-    ctx.Products.Create("A", 1.25M, discountAmount = 3, discountPrice = 3.00M)
-    ctx.Products.Create("B", 4.25M)
-    ctx.Products.Create("C", 1.00M, discountAmount = 6, discountPrice = 5.00M)
-    ctx.Products.Create("D", 0.75M)
+let context = Context.createContext()
+let calulator : CartCalculator = CartItemDiscountCalculator(context) 
+let terminal = PointOfSaleTerminal(context, calulator)
 
-let calulator : CartCalculator = CartItemDiscountCalculator(ctx) 
-let terminal = PointOfSaleTerminal(ctx, calulator)
+context.Products.Create("A", 1.25M, discountAmount = 3, discountPrice = 3.00M)
+context.Products.Create("B", 4.25M)
+context.Products.Create("C", 1.00M, discountAmount = 6, discountPrice = 5.00M)
+context.Products.Create("D", 0.75M)
 
 let inline testTotalPrice products expectedTotalPrice =
     let cart = terminal.CreateCart()

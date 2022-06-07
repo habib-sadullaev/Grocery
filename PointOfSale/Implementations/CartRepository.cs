@@ -2,12 +2,12 @@
 
 using Grocery.PointOfSale.Interfaces;
 using Grocery.PointOfSale.Models;
+using static Utils;
 
 internal class CartRepository : ICartRepository
 {
     private Context context;
     private static int counter = 0;
-    private static string CartKey(int cartId) => $"cart_{cartId}";
 
     public CartRepository(Context context)
     {

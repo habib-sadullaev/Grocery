@@ -2,6 +2,7 @@
 
 using Grocery.PointOfSale.Interfaces;
 using Grocery.PointOfSale.Models;
+using static Utils;
 
 internal class ProductRepository : IProductRepository
 {
@@ -31,7 +32,6 @@ internal class ProductRepository : IProductRepository
         context.Store[key] = product;
     }
 
-    private static string ProductKey(string productCode) => $"product_{productCode}";
 
     public Product Get(string productCode)
     {

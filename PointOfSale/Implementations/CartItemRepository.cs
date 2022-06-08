@@ -6,7 +6,7 @@ using static Utils;
 
 internal class CartItemRepository : ICartItemRepository
 {
-    private Context context;
+    private readonly Context context;
 
     public CartItemRepository(Context context)
     {

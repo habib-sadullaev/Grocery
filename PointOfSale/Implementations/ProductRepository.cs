@@ -16,8 +16,9 @@ internal class ProductRepository : IProductRepository
     public void Create(string productCode, decimal productPrice, int? discountAmount = null, decimal? discountPrice = null)
     {
         var key = ProductKey(productCode);
+
         if (context.Store.TryGetValue(key, out _))
-            new InvalidOperationException($"Product with code '{productCode} already exists'");
+            throw new InvalidOperationException($"Product with code '{productCode} already exists'");
 
         var product = new Product(productCode);
         var price = new ProductPrice(product, productPrice);

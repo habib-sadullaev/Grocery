@@ -6,7 +6,7 @@ using static Utils;
 
 internal class CartRepository : ICartRepository
 {
-    private Context context;
+    private readonly Context context;
     private static int counter = 0;
 
     public CartRepository(Context context)
